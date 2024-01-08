@@ -20,7 +20,7 @@ func run() error {
 	chattixDelivery := handlers.NewChat()
 	slog.Info("app initialized")
 
-	http.Handle("/v1/chattix/", chattixDelivery.Handler())
+	http.Handle("/", chattixDelivery.Handler())
 
 	srv := http.Server{
 		Addr: "0.0.0.0:80",

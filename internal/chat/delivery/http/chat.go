@@ -17,7 +17,7 @@ func NewChat() *Chat {
 		router: chi.NewRouter(),
 	}
 
-	h.router.Get("/", h.Index)
+	h.router.HandleFunc("/", h.Index)
 
 	return h
 }
@@ -27,13 +27,20 @@ func (c *Chat) Handler() http.Handler {
 }
 
 func (c *Chat) Index(w http.ResponseWriter, r *http.Request) {
-	tmpl, err := template.ParseFiles("internal/template/index.html")
+	tmpl, err := template.ParseFiles("internal/chat/templates/index.html")
 	if err != nil {
-		slog.Error("failed to parse template file: %w", err)
+		slog.Error("failed to parse templates file: %w", err)
 		return
 	}
-	if err := tmpl.Execute(w, nil); err != nil {
-		slog.Error("failed to execute template: %w", err)
-		return
+
+	switch r.Method {
+	case "GET":
+		if err := tmpl.Execute(w, nil); err != nil {
+			slog.Error("failed to execute templates: %w", err)
+			return
+		}
+	case "POST":
+
 	}
+
 }
