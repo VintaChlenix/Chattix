@@ -22,7 +22,7 @@ func run() error {
 	http.Handle("/v1/chattix/", chattixDelivery.Handler())*/
 
 	srv := http.Server{
-		Addr: "0.0.0.0:8080",
+		Addr: "0.0.0.0:80",
 	}
 
 	eg, ctx := errgroup.WithContext(ctx)
