@@ -9,6 +9,7 @@ import (
 	"os/signal"
 	"syscall"
 
+	handlers "Chattix/internal/chat/delivery/http"
 	"golang.org/x/sync/errgroup"
 )
 
@@ -16,10 +17,10 @@ func run() error {
 	ctx, stop := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
 	defer stop()
 
-	/*chattixDelivery := handlers.NewChattix(service.NewChattix(http.NewChattix()))
+	chattixDelivery := handlers.NewChat()
 	slog.Info("app initialized")
 
-	http.Handle("/v1/chattix/", chattixDelivery.Handler())*/
+	http.Handle("/v1/chattix/", chattixDelivery.Handler())
 
 	srv := http.Server{
 		Addr: "0.0.0.0:80",
